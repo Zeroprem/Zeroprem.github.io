@@ -1,0 +1,37 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import type { ReactNode } from "react";
+
+/**
+ * Entrance reveal on scroll. Communicates reading order: content arrives in the
+ * sequence it should be read. Collapses to static under reduced motion.
+ */
+export function Reveal({
+  children,
+  delay = 0,
+  y = 18,
+  className,
+  as = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+  as?: "div" | "li" | "section" | "span";
+}) {
+  const reduce = useReducedMotion();
+  const Tag = motion[as];
+
+  return (
+    <Tag
+      className={className}
+      initial={reduce ? false : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </Tag>
+  );
+}
