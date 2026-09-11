@@ -16,7 +16,15 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://premchandtarange.vercel.app";
+/**
+ * Netlify exposes the deployed site URL as `URL` at build time, so Open Graph,
+ * canonical and JSON-LD metadata resolve correctly without editing this file.
+ * Set NEXT_PUBLIC_SITE_URL to override, for example once a custom domain is on.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.URL ??
+  "http://localhost:3000";
 const title = `${profile.name} | ${profile.role}`;
 
 export const metadata: Metadata = {

@@ -42,9 +42,10 @@ To replace the resume PDF, drop a new file at
 picks up the build command, the publish directory and the Next.js runtime
 plugin automatically.
 
-After the first deploy, set the real site URL in `src/app/layout.tsx`
-(`siteUrl`) so Open Graph, canonical and JSON-LD metadata point at the live
-domain.
+The site URL used by Open Graph, canonical and JSON-LD metadata resolves from
+Netlify's own `URL` build variable, so nothing needs editing after the first
+deploy. Once a custom domain is attached, set `NEXT_PUBLIC_SITE_URL` in
+Netlify's environment variables to override it.
 
 ## Accessibility and motion
 
